@@ -923,8 +923,8 @@
 				for (var i=0; i<node.childNodes.length; i++) {
 					var childNode = node.childNodes[i];
 					if (childNode.nodeType == 1) this.addChild(childNode, true); //ELEMENT_NODE
-					if (this.captureTextNodes && (childNode.nodeType == 3 || childNode.nodeType == 4)) {
-						var text = childNode.value || childNode.text || childNode.textContent || '';
+					if (this.captureTextNodes && (childNode.nodeType == 3 || childNode.nodeType == 1 )) {
+						var text = childNode.value || childNode.textContent || '';
 						if (svg.compressSpaces(text) != '') {
 							this.addChild(new svg.Element.tspan(childNode), false); // TEXT_NODE
 						}
@@ -2342,7 +2342,7 @@
 			this.base = svg.Element.TextElementBase;
 			this.base(node);
 
-			this.text = svg.compressSpaces(node.value || node.text || node.textContent || '');
+			this.text = svg.compressSpaces(node.value ||node.textContent || '');
 			this.getText = function() {
 				// if this node has children, then they own the text
 				if (this.children.length > 0) { return ''; }
